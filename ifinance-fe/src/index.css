@@ -1,0 +1,99 @@
+body {
+    color: #000000;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    color: #000000;
+    background-color: #000000;
+}
+
+#loginForm {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#loginContainer {
+    margin-top: 5%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#loginForm .mb-3 {
+    width: 50%;
+}
+
+#expensesTable {
+    margin: 5% 10% 5% 10%
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+  
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 5px;
+}
+  
+th {
+    background-color: #f4f4f4;
+}
+
+#title_row {
+    position: relative;
+    padding: 15px;
+}
+
+#add_expense_button {
+    position: absolute;
+    right: 0;
+    margin: 1px 10px 5% 0;
+    border-radius: 10px;
+    background-color:#404040;
+    color:white;
+    border-color: white;
+}
+
+#add_expense_form{
+    display: block;
+}
+
+#add_expense_field {
+    margin-left: 1%;
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+
+#delete_category_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#delete_category_option {
+    text-transform: capitalize;
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh; /* Adjust height as needed */
+  }
+  
+  .chart-container h1,
+  .chart-container select {
+    margin-bottom: 20px; /* Adjust spacing as needed */
+  }
