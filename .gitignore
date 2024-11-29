@@ -1,0 +1,9 @@
+__pycache__
+.vscode
+flask_session
+instance
+lib
+lib64
+myven
+include
+bin
