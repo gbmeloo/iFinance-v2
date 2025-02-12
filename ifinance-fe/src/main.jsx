@@ -5,13 +5,13 @@ import './index.css'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import Home from './routes/Home';
-import Login from './routes/Login';
-import Register from './routes/Register'
-import Logout from './routes/Logout'
-import Addcategory from './routes/Addcategory'
-import ErrorPage from './routes/ErrorPage'
-import Charts from './routes/Charts'
+import Home from './routes/Home.jsx';
+import Login from './routes/Login.jsx';
+import Register from './routes/Register.jsx'
+import Logout from './routes/Logout.jsx'
+import Addcategory from './routes/Addcategory.jsx'
+import ErrorPage from './routes/ErrorPage.jsx'
+import Charts from './routes/Charts.jsx'
 
 const router = createBrowserRouter([
   {
