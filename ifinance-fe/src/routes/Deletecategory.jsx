@@ -47,7 +47,7 @@ const Deletecategory = () => {
   };
 
   const fetchCategories = () => {
-    axios.get('http://127.0.0.1:8000/get_categories', { headers })
+    axios.get('https://i-finance-api.vercel.app/get_categories', { headers })
       .then(response => {
         setCategories(response.data.categories);
       })

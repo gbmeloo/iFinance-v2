@@ -32,7 +32,7 @@ const Home = () => {
   }, [showForm]);
 
   function fetchExpensesData() {
-    axios.post('http://127.0.0.1:8000/fetch_expenses_data', {}, { headers })
+    axios.post('https://i-finance-api.vercel.app/fetch_expenses_data', {}, { headers })
       .then(response => {
         const sortedData = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
         setData(sortedData);
@@ -43,7 +43,7 @@ const Home = () => {
   }
 
   function fetchCategories(e) {
-    axios.get('http://127.0.0.1:8000/get_categories', { headers })
+    axios.get('https://i-finance-api.vercel.app/get_categories', { headers })
       .then(response => {
         setCategories(response.data.categories);
       })

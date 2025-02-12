@@ -45,7 +45,7 @@ const addCategory = () => {
 
   const handleAddCategory = (e) => {
     e.preventDefault();
-    axios.post('http://127.0.0.1:8000/add_category', newCategory, { headers })
+    axios.post('https://i-finance-api.vercel.app/add_category', newCategory, { headers })
       .then(response => {
         setData(prevData => [...prevData, response.data]);
         setNewCaterory({ category: ''}); // Clear form fields

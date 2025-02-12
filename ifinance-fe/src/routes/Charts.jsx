@@ -44,7 +44,7 @@ const Charts = () => {
     };
 
     useEffect(() => {
-      axios.get('http://127.0.0.1:8000/chartview', { headers })
+      axios.get('https://i-finance-api.vercel.app/chartview', { headers })
         .then(response => {
           setYears(response.data);
           setLoading(false);
