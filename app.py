@@ -16,7 +16,7 @@ from helpers import token_required, check_name_field, validate_password, validat
 app = Flask(__name__)
 
 # Allow requests from front-end
-CORS(app, resources={r"/*": {"origins": "http://localhost:3001"}})
+CORS(app, resources={r"/*": {"origins": "https://i-finance-woad.vercel.app/"}})
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
