@@ -5,8 +5,8 @@ import './index.css'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import Home from './routes/home';
-import Login from './routes/login';
+import Home from './routes/Home';
+import Login from './routes/Login';
 import Register from './routes/Register'
 import Logout from './routes/Logout'
 import Addcategory from './routes/Addcategory'

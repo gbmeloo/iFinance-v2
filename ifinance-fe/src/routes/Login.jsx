@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const login = () => {
+const Login = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -90,4 +90,4 @@ const login = () => {
   )
 }
 
-export default login;
+export default Login;
