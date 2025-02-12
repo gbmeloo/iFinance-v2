@@ -19,7 +19,7 @@ const Home = () => {
 
   useEffect(() => {
     if (!token) {
-      navigate('/login');
+      navigate('/Login');
     } else {
       fetchExpensesData();
     }

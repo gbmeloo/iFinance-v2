@@ -41,7 +41,7 @@ const Register = () => {
         console.log("Works!!")
   
         // Redirect user to home page
-        navigate('/login');
+        navigate('/Login');
       } catch (error) {
           console.error(error); // Log any errors
           // Handle error

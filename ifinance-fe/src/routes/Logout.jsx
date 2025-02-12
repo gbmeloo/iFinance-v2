@@ -9,9 +9,9 @@ function Logout() {
         localStorage.removeItem('token');
 
         // Redirect user to login page
-        window.location.href = '/login';
+        window.location.href = '/Login';
 
-        navigate("/login")
+        navigate("/Login")
     }
     catch {
         console.error(error); // Log any errors
