@@ -31,6 +31,7 @@ const ChartBuild = ({ x, y }) => {
   };
 
 const Charts = () => {
+    const API = process.env.REACT_APP_API_URL;
     const [years, setYears] = useState([]);
     const [chartData, setChartData] = useState({ x: [], y: [] });
     const [loading, setLoading] = useState(true);
@@ -44,7 +45,7 @@ const Charts = () => {
     };
 
     useEffect(() => {
-      axios.get('https://i-finance-api.vercel.app/chartview', { headers })
+      axios.get(`${API}/chartview`, { headers })
         .then(response => {
           setYears(response.data);
           setLoading(false);
@@ -64,7 +65,7 @@ const Charts = () => {
 
     const fetchChartData = (year) => {
       setLoading(true);
-      axios.post('http://127.0.0.1:8000/fetch_data_chart', { year }, { headers })
+      axios.post(`${API}/fetch_data_chart`, { year }, { headers })
         .then(response => {
           const data = response.data;
           const xValues = data.map(item => item.month); // Extracting month values for x-axis

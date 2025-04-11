@@ -9,6 +9,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate(); // Get the history object to navigate
+  const API = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -22,7 +23,7 @@ const Login = () => {
 
       try {
         // Send POST request to API
-        const response = await axios.post('https://i-finance-api.vercel.app/login', {
+        const response = await axios.post(`${API}/login`, {
           username,
           password
         });

@@ -11,6 +11,7 @@ const Home = () => {
   const [showForm, setShowForm] = useState(false);
   const [newExpense, setNewExpense] = useState({ category: '', date: '', name: '', price: '' });
   const token = localStorage.getItem('token');
+  const API = process.env.REACT_APP_API_URL;
 
   const headers = {
     'Content-Type': 'application/json',
@@ -32,7 +33,7 @@ const Home = () => {
   }, [showForm]);
 
   function fetchExpensesData() {
-    axios.post('https://i-finance-api.vercel.app/fetch_expenses_data', {}, { headers })
+    axios.post(`${API}/fetch_expenses_data`, {}, { headers })
       .then(response => {
         const sortedData = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
         setData(sortedData);
@@ -43,7 +44,7 @@ const Home = () => {
   }
 
   function fetchCategories(e) {
-    axios.get('https://i-finance-api.vercel.app/get_categories', { headers })
+    axios.get(`${API}/get_categories`, { headers })
       .then(response => {
         setCategories(response.data.categories);
       })
@@ -60,7 +61,7 @@ const Home = () => {
 
   const handleAddExpense = (e) => {
     e.preventDefault();
-    axios.post('http://127.0.0.1:8000/add_expense', newExpense, { headers })
+    axios.post(`${API}/add_expense`, newExpense, { headers })
       .then(response => {
         setData(prevData => [...prevData, response.data]);
         setShowForm(false);

@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import axios from "axios";
 
 const addCategory = () => {
+  const API = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const token = localStorage.getItem('token')
   const [admin, setAdmin] = useState(false);
@@ -45,7 +46,7 @@ const addCategory = () => {
 
   const handleAddCategory = (e) => {
     e.preventDefault();
-    axios.post('https://i-finance-api.vercel.app/add_category', newCategory, { headers })
+    axios.post(`${API}/add_category`, newCategory, { headers })
       .then(response => {
         setData(prevData => [...prevData, response.data]);
         setNewCaterory({ category: ''}); // Clear form fields

@@ -9,6 +9,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [confirmation, setConfirmPassword] = useState('');
   const navigate = useNavigate(); // Get the history object to navigate
+  const API = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -28,7 +29,7 @@ const Register = () => {
 
       try {
         // Send POST request to API
-        const response = await axios.post('https://i-finance-api.vercel.app/register', {
+        const response = await axios.post(`${API}/register`, {
           name,
           username,
           password,

@@ -5,6 +5,7 @@ import { Form, Button } from 'react-bootstrap';
 import axios from "axios";
 
 const Deletecategory = () => {
+  const API = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const token = localStorage.getItem('token')
   const [admin, setAdmin] = useState(false);
@@ -47,7 +48,7 @@ const Deletecategory = () => {
   };
 
   const fetchCategories = () => {
-    axios.get('https://i-finance-api.vercel.app/get_categories', { headers })
+    axios.get(`${API}/get_categories`, { headers })
       .then(response => {
         setCategories(response.data.categories);
       })
@@ -59,7 +60,7 @@ const Deletecategory = () => {
 
   const handleDeleteCategory = (e) => {
     e.preventDefault();
-    axios.post('http://127.0.0.1:8000/delete_category', newCategory, { headers })
+    axios.post(`${API}/delete_category`, newCategory, { headers })
       .then(response => {
         setData(prevData => [...prevData, response.data]);
         setNewCaterory({ category: ''}); // Clear form fields
