@@ -31,13 +31,13 @@ const ChartBuild = ({ x, y }) => {
   };
 
 const Charts = () => {
-    const API = process.env.REACT_APP_API_URL;
     const [years, setYears] = useState([]);
     const [chartData, setChartData] = useState({ x: [], y: [] });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [selectedYear, setSelectedYear] = useState('');
     const token = localStorage.getItem('token')
+    const API = import.meta.env.VITE_API_URL;
 
     const headers = {
       'Content-Type': 'application/json',

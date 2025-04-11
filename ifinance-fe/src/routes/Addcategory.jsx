@@ -5,13 +5,13 @@ import Button from 'react-bootstrap/Button';
 import axios from "axios";
 
 const addCategory = () => {
-  const API = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const token = localStorage.getItem('token')
   const [admin, setAdmin] = useState(false);
   const [data, setData] = useState([]);
   const [newCategory, setNewCaterory] = useState({ category: '' });
   const [statusCode, setStatusCode] = useState(null);
+  const API = import.meta.env.VITE_API_URL;
 
   const headers = {
     'Content-Type': 'application/json',

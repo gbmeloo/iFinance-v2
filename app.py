@@ -20,9 +20,10 @@ app = Flask(__name__)
 # Load environment variables from .env file
 load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
+CORS_ADDRESS = os.getenv("CORS_ADDRESS")
 
 # Allow requests from front-end
-CORS(app, resources={r"/*": {"origins": "https://i-finance-woad.vercel.app/"}})
+CORS(app, resources={r"/*": {"origins": CORS_ADDRESS}}) # Fetching the allowed address from .env file
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False

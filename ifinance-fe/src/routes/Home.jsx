@@ -11,7 +11,7 @@ const Home = () => {
   const [showForm, setShowForm] = useState(false);
   const [newExpense, setNewExpense] = useState({ category: '', date: '', name: '', price: '' });
   const token = localStorage.getItem('token');
-  const API = process.env.REACT_APP_API_URL;
+  const API = import.meta.env.VITE_API_URL;
 
   const headers = {
     'Content-Type': 'application/json',
