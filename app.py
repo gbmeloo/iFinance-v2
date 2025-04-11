@@ -1,19 +1,25 @@
 import jwt
 import logging
+import os
 
 from datetime import date, datetime, timedelta
 from flask import Flask, jsonify, request, g
 from flask_session import Session
-from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from sqlalchemy import func
 from sqlalchemy.exc import SQLAlchemyError
 from werkzeug.security import check_password_hash, generate_password_hash
+from dotenv import load_dotenv
+from models import db, Users, ExpenseCategory, Expenses
 
 from helpers import token_required, check_name_field, validate_password, validate_username, validate_name_50char
 
 # Configure application
 app = Flask(__name__)
+
+# Load environment variables from .env file
+load_dotenv()
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # Allow requests from front-end
 CORS(app, resources={r"/*": {"origins": "https://i-finance-woad.vercel.app/"}})
@@ -25,33 +31,11 @@ app.config["SESSION_TYPE"] = "filesystem"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///finance.sqlite3"
 app.config["SQLALCHEMY_TRACK_MODIFICATION"] = False
 Session(app)
+db.init_app(app)
 
 # Defining consts
 ACCESS_DENIED = {"message": "Access Denied"} 
 
-db = SQLAlchemy(app)
-
-class Users(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   name = db.Column(db.String(50))
-   username = db.Column(db.String(50), unique=True)
-   hash = db.Column(db.String(170), unique=True)
-   admin = db.Column(db.Boolean, default=False)
-   date_joined = db.Column(db.Date)
-   expenses = db.relationship('Expenses', backref='user')
-   
-class ExpenseCategory(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   name = db.Column(db.String(50))
-   expenses = db.relationship('Expenses', backref='category')
-
-class Expenses(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-   name = db.Column(db.String(50))
-   price = db.Column(db.Float)
-   date = db.Column(db.Date)
-   category_id = db.Column(db.Integer, db.ForeignKey('expense_category.id'))
 
 with app.app_context():
    db.create_all()
@@ -86,7 +70,7 @@ def login():
       }
 
       # Generate the token
-      token = jwt.encode(payload, 'your_secret_key', algorithm='HS256')
+      token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
       # Return the token
       return jsonify({'token': token}), 200

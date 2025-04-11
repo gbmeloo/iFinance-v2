@@ -1,8 +1,14 @@
 import jwt
 import re
+import os
+from dotenv import load_dotenv
 
 from flask import jsonify, g, request
 from functools import wraps
+
+# Load environment variables from .env file
+load_dotenv()
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 
 def token_required(f):
@@ -15,7 +21,7 @@ def token_required(f):
 
         try:
             # Decode the token
-            data = jwt.decode(token, 'your_secret_key', algorithms=['HS256'])
+            data = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
             g.admin = data.get("admin", 0)
             
             # Admin check can be done within the protected routes
