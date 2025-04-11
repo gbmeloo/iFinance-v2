@@ -8,3 +8,4 @@ myven
 include
 bin
 .env
+pyvenv.cfg
