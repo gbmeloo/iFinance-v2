@@ -12,8 +12,7 @@ const Login = () => {
   const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
+    if (localStorage.getItem('token')) {
       navigate('/'); // Redirect to home page if token exists
     }
   }, []); 
@@ -30,12 +29,6 @@ const Login = () => {
   
         // Store token in localStorage
         localStorage.setItem('token', response.data.token);
-
-        if (response.status === 600) {
-          setError(600); // Set error state if status is 600
-        } else if (!response.ok) {
-          setError('Something went wrong');
-        }
   
         // Redirect user to home page
         navigate('/');
