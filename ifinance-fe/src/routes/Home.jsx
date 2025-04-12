@@ -14,7 +14,7 @@ const Home = () => {
 
   const headers = {
     'Content-Type': 'application/json',
-    'Authorization': token
+    'Authorization': `Bearer ${token}`
   };
 
   useEffect(() => {
@@ -25,8 +25,8 @@ const Home = () => {
     }
   }, [token, navigate]);
 
-  function fetchExpensesData() {
-    axios.post(`${API}/fetch_expenses_data`, {}, { headers })
+  const fetchExpensesData = async () => {
+    await axios.post(`${API}/fetch_expenses_data`, {}, { headers })
       .then(response => {
         const sortedData = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
         setData(sortedData);
@@ -42,9 +42,9 @@ const Home = () => {
   };
 
 
-  const handleAddExpense = (e) => {
+  const handleAddExpense = async (e) => {
     e.preventDefault();
-    axios.post(`${API}/add_expense`, newExpense, { headers })
+    await axios.post(`${API}/add_expense`, newExpense, { headers })
       .then(response => {
         setData(prevData => [...prevData, response.data]);
         setShowForm(false);
