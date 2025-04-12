@@ -131,7 +131,7 @@ def register():
         return jsonify({"message": f"Database error: {str(e)}"}), 400
       
 
-@app.route("/add_expense", methods=["POST", "OPTIONS"])
+@app.route("/add_expense", methods=["POST"])
 @token_required
 def add_expense():
    expense_data = request.json
