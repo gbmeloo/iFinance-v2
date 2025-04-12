@@ -167,7 +167,7 @@ def add_expense():
       name=expense_data["name"],
       price=price,
       date=expense_date,
-      category_id=category 
+      category=category 
    )
 
    try:
