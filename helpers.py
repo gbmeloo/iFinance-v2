@@ -3,7 +3,7 @@ import re
 import os
 from dotenv import load_dotenv
 
-from flask import jsonify, g, request
+from flask import jsonify, g, request, make_response
 from functools import wraps
 
 # Load environment variables from .env file
@@ -14,8 +14,11 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        token = request.headers.get('Authorization')
+        if request.method == 'OPTIONS':
+            return make_response(('', 204))
 
+        token = request.headers.get('Authorization')
+        
         if not token:
             return jsonify({"message": "Access denied"}), 400
 
