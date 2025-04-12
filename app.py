@@ -21,12 +21,11 @@ app = Flask(__name__)
 load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
 # Retrieve and split the CORS addresses from the environment (ensuring no extra whitespace)
-cors_addresses = [addr.strip() for addr in os.getenv("CORS_ADDRESS").split(",")]
+CORS_ADDRESS = os.getenv("CORS_ADDRESS")
+print("Using CORS allowed origins:", CORS_ADDRESS)
 
 # Configure CORS for your app to allow specific origins
-CORS(app, resources={r"/*": {"origins": cors_addresses}})
-
-print("Allowed CORS origins:", cors_addresses)
+CORS(app, origins=CORS_ADDRESS, supports_credentials=True)
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
