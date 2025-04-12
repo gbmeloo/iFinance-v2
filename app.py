@@ -28,7 +28,8 @@ CORS(app,
      origins=CORS_ADDRESS, 
      supports_credentials=True,
      allow_headers=["Content-Type", "Authorization"],
-     methods=["GET", "POST", "OPTIONS", "PUT", "DELETE"])
+     methods=["GET", "POST", "OPTIONS", "PUT", "DELETE"],
+     debug=True)
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
