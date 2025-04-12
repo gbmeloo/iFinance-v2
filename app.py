@@ -23,7 +23,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 CORS_ADDRESSES = os.getenv("CORS_ADDRESS").split(",")
 
 # Allow requests from front-end
-CORS(app, resources={r"/*": {"origins": CORS_ADDRESSES}}) # Fetching the allowed address from .env file
+CORS(app, origins=CORS_ADDRESSES, supports_credentials=True) # Fetching the allowed address from .env file
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
