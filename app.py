@@ -22,10 +22,13 @@ load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
 # Retrieve and split the CORS addresses from the environment (ensuring no extra whitespace)
 CORS_ADDRESS = os.getenv("CORS_ADDRESS")
-print("Using CORS allowed origins:", CORS_ADDRESS)
 
 # Configure CORS for your app to allow specific origins
-CORS(app, origins=CORS_ADDRESS, supports_credentials=True)
+CORS(app, 
+     origins=CORS_ADDRESS, 
+     supports_credentials=True,
+     allow_headers=["Content-Type", "Authorization"],
+     methods=["GET", "POST", "OPTIONS", "PUT", "DELETE"])
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
