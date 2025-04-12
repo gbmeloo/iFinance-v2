@@ -25,7 +25,7 @@ CORS_ADDRESS = os.getenv("CORS_ADDRESS")
 print("Using CORS allowed origins:", CORS_ADDRESS)
 
 # Configure CORS for your app to allow specific origins
-CORS(app, origins=CORS_ADDRESS, supports_credentials=True)
+CORS(app, origins="*", supports_credentials=True)
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
