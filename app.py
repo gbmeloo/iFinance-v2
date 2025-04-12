@@ -251,10 +251,10 @@ def fetch_expenses_data():
       expenses = []
 
       for expense in expense_data_query:
-         # Converter cada objeto de despesa em um dicionário
+         # Converting each data from expense query to a dictionary
          expense_data = {
             "name": expense.name,
-            "category": expense.category.name,
+            "category": expense.category,
             "price": expense.price,
             "date": expense.date
          }
@@ -266,7 +266,7 @@ def fetch_expenses_data():
       return jsonify({"message": str(ve)}), 400
    except Exception as e:
       logging.error(f"An error occurred: {str(e)}")
-      return jsonify({"message": "Some error occurred"}), 400
+      return jsonify({"message": {str(e)}}), 400
 
 # Route used by chartview
 @app.route("/fetch_data_chart", methods=["POST"])
