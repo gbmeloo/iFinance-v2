@@ -14,6 +14,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
+        if request.method == 'OPTIONS':
+            return make_response(('', 204))
 
         token = request.headers.get('Authorization')
         
