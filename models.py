@@ -13,12 +13,12 @@ class Users(db.Model):
    date_joined = db.Column(db.Date)
    expenses = db.relationship('Expenses', backref='user')
    
-class ExpenseCategory(db.Model):
-   __tablename__ = 'expense_category'
+# class ExpenseCategory(db.Model):
+#    __tablename__ = 'expense_category'
 
-   id = db.Column(db.Integer, primary_key=True)
-   name = db.Column(db.String(50))
-   expenses = db.relationship('Expenses', backref='category')
+#    id = db.Column(db.Integer, primary_key=True)
+#    name = db.Column(db.String(50))
+#    expenses = db.relationship('Expenses', backref='category')
 
 class Expenses(db.Model):
    __tablename__ = 'expenses'
@@ -28,4 +28,4 @@ class Expenses(db.Model):
    name = db.Column(db.String(50))
    price = db.Column(db.Float)
    date = db.Column(db.Date)
-   category_id = db.Column(db.Integer, db.ForeignKey('expense_category.id'))
+   category= db.Column(db.String(50))

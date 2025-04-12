@@ -43,16 +43,6 @@ const Home = () => {
       });
   }
 
-  function fetchCategories(e) {
-    axios.get(`${API}/get_categories`, { headers })
-      .then(response => {
-        setCategories(response.data.categories);
-      })
-      .catch(error => {
-        console.error("There was an error fetching the categories!", error);
-      });
-  };
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewExpense(prevState => ({ ...prevState, [name]: value }));
@@ -88,21 +78,16 @@ const Home = () => {
               onChange={handleInputChange} 
               required 
             />
-            <select 
-              name="category" 
+            <input
+              type="text"
+              name="category"
+              placeholder="Category"
+              style={{ borderRadius: '5px' }}
               id="add_expense_field"
               value={newExpense.category} 
               onChange={handleInputChange} 
               required
-              style={{ padding: '2px'}}
-            >
-              <option value="" disabled>Select Category</option>
-              {categories.map((category, index) => (
-                <option key={index} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>       
+            />     
             <input 
               type="date" 
               name="date" 

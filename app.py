@@ -162,20 +162,15 @@ def add_category():
 @app.route("/add_expense", methods=["POST"])
 @token_required
 def add_expense():
-   categories = ExpenseCategory.query.all()
-
    expense_data = request.json
-
-   if expense_data['category'] not in [category.name for category in categories]:
-      return jsonify("Category not available"), 404
    if not expense_data["name"] or not expense_data["category"]:
       return jsonify("Name or category fields can't be null"), 403
    
    if not validate_name_50char(expense_data["name"]):
-      return jsonify({"message": "Expense name can't contain numbers or greater than 50 characters"}), 400
+      return jsonify({"message": "Expense name can't contain numbers or more than 50 characters"}), 400
 
    price = float(expense_data["price"])
-   if price <= 0:
+   if price <= 0.0:
       return jsonify("Price can't be 0 or lower"), 403
    
    expense_date = datetime.strptime(expense_data["date"], "%Y-%m-%d").date()
@@ -188,7 +183,7 @@ def add_expense():
       return jsonify({"message": "Categort can't be empty"}), 400
 
    token = request.headers.get('Authorization')
-   user_data = jwt.decode(token, 'your_secret_key', algorithms=['HS256'])
+   user_data = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
 
    expense_data_db = Expenses(
       user_id=user_data['user_id'],
@@ -206,14 +201,14 @@ def add_expense():
    except ValueError:
       return jsonify("Some error ocurred"), 400
 
-
-@app.route("/get_categories")
-@token_required
-def get_categories():
-   categories = ExpenseCategory.query.all()  # Fetch categories from your database
-   category_names = [category.name for category in categories]
+# Deprecated route for fetching categories
+# @app.route("/get_categories")
+# @token_required
+# def get_categories():
+#    categories = ExpenseCategory.query.all()  # Fetch categories from your database
+#    category_names = [category.name for category in categories]
    
-   return jsonify({'categories': category_names})
+#    return jsonify({'categories': category_names})
 
 
 # Chartview route
@@ -221,7 +216,7 @@ def get_categories():
 @token_required
 def chartview():
    token = request.headers.get('Authorization')
-   user_data = jwt.decode(token, 'your_secret_key', algorithms=['HS256'])
+   user_data = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
    try:
       years_query = db.session.query(func.extract('year', Expenses.date)).filter(Expenses.user_id == user_data['user_id']).distinct()
       years = [result[0] for result in years_query]
@@ -236,7 +231,7 @@ def chartview():
 @token_required
 def fetch_expenses_data():
    token = request.headers.get('Authorization')
-   user_data = jwt.decode(token, 'your_secret_key', algorithms=['HS256'])
+   user_data = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
 
    try:
       user_id = user_data.get("user_id")
@@ -271,7 +266,7 @@ def fetch_expenses_data():
 def fetch_data_chart():
    year = request.json.get("year")  # Access JSON data from the request body
    token = request.headers.get('Authorization')
-   user_data = jwt.decode(token, 'your_secret_key', algorithms=['HS256'])
+   user_data = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
 
    try:
       user_id = user_data.get("user_id")
