@@ -130,36 +130,36 @@ def register():
         return jsonify({"message": f"Database error: {str(e)}"}), 400
 
 
-@app.route("/add_category", methods=["POST"])
-@token_required
-def add_category():
-   if not g.get('admin'):
-      return jsonify(ACCESS_DENIED), 401
+# @app.route("/add_category", methods=["POST"])
+# @token_required
+# def add_category():
+#    if not g.get('admin'):
+#       return jsonify(ACCESS_DENIED), 401
 
-   data = request.get_json()
+#    data = request.get_json()
 
-   if not data or 'category' not in data:
-      return jsonify("Missing category data"), 400
+#    if not data or 'category' not in data:
+#       return jsonify("Missing category data"), 400
 
-   category_json = data['category'].strip().lower()
+#    category_json = data['category'].strip().lower()
 
-   if not validate_name_50char(category_json):
-      return jsonify("Only alphabetical and less than 50 characters names is allowed"), 500
+#    if not validate_name_50char(category_json):
+#       return jsonify("Only alphabetical and less than 50 characters names is allowed"), 500
 
-   existing_category = db.session.query(ExpenseCategory).filter_by(name=category_json).first()
+#    existing_category = db.session.query(ExpenseCategory).filter_by(name=category_json).first()
 
-   if existing_category:
-      return jsonify("Category already exists"), 403
+#    if existing_category:
+#       return jsonify("Category already exists"), 403
 
-   category = ExpenseCategory(name=category_json)
+#    category = ExpenseCategory(name=category_json)
 
-   try:
-      db.session.add(category)
-      db.session.commit()
-      return jsonify("Category added"), 200
-   except Exception as e:
-      db.session.rollback()
-      return jsonify(f"Some error occurred: {str(e)}"), 500
+#    try:
+#       db.session.add(category)
+#       db.session.commit()
+#       return jsonify("Category added"), 200
+#    except Exception as e:
+#       db.session.rollback()
+#       return jsonify(f"Some error occurred: {str(e)}"), 500
 
 
 @app.route("/add_expense", methods=["POST"])
@@ -180,10 +180,15 @@ def add_expense():
 
    if expense_date > date.today():
       return jsonify("Date can't be in the future"), 403
-
-   category = ExpenseCategory.query.filter_by(name=expense_data["category"]).first()
+   
+   category = expense_data["category"].strip().lower()
    if not category:
-      return jsonify({"message": "Categort can't be empty"}), 400
+      return jsonify("Category can't be empty"), 400
+
+   # Deprecated code for category fetching
+   # category = ExpenseCategory.query.filter_by(name=expense_data["category"]).first()
+   # if not category:
+   #    return jsonify({"message": "Categort can't be empty"}), 400
 
    token = request.headers.get('Authorization')
    user_data = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
@@ -193,7 +198,7 @@ def add_expense():
       name=expense_data["name"],
       price=price,
       date=expense_date,
-      category_id=category.id
+      category_id=category 
    )
 
    try:
