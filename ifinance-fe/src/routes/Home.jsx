@@ -14,7 +14,8 @@ const Home = () => {
 
   const headers = {
     'Content-Type': 'application/json',
-    'Authorization': token
+    'Authorization': token,
+    'Access-Control-Allow-Origin': '*'
   };
 
   useEffect(() => {

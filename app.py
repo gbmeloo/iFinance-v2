@@ -150,11 +150,6 @@ def add_expense():
    if not category:
       return jsonify("Category can't be empty"), 400
 
-   # Deprecated code for category fetching
-   # category = ExpenseCategory.query.filter_by(name=expense_data["category"]).first()
-   # if not category:
-   #    return jsonify({"message": "Categort can't be empty"}), 400
-
    token = request.headers.get('Authorization')
    user_data = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
 
@@ -173,15 +168,6 @@ def add_expense():
       return jsonify("Success"), 200
    except ValueError:
       return jsonify("Some error ocurred"), 400
-
-# Deprecated route for fetching categories
-# @app.route("/get_categories")
-# @token_required
-# def get_categories():
-#    categories = ExpenseCategory.query.all()  # Fetch categories from your database
-#    category_names = [category.name for category in categories]
-   
-#    return jsonify({'categories': category_names})
 
 
 # Chartview route
