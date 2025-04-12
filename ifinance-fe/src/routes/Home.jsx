@@ -7,7 +7,6 @@ import Table from 'react-bootstrap/Table';
 const Home = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [newExpense, setNewExpense] = useState({ category: '', date: '', name: '', price: '' });
   const token = localStorage.getItem('token');
@@ -25,12 +24,6 @@ const Home = () => {
       fetchExpensesData();
     }
   }, [token, navigate]);
-
-  useEffect(() => {
-    if (showForm) {
-      fetchCategories();
-    }
-  }, [showForm]);
 
   function fetchExpensesData() {
     axios.post(`${API}/fetch_expenses_data`, {}, { headers })
