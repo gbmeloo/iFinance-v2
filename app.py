@@ -10,7 +10,7 @@ from sqlalchemy import func
 from sqlalchemy.exc import SQLAlchemyError
 from werkzeug.security import check_password_hash, generate_password_hash
 from dotenv import load_dotenv
-from models import db, Users, ExpenseCategory, Expenses
+from models import db, Users, Expenses
 
 from helpers import token_required, check_name_field, validate_password, validate_username, validate_name_50char
 
