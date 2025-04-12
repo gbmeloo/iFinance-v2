@@ -128,39 +128,7 @@ def register():
       except SQLAlchemyError as e:
         # Log the error or handle it as needed
         return jsonify({"message": f"Database error: {str(e)}"}), 400
-
-
-# @app.route("/add_category", methods=["POST"])
-# @token_required
-# def add_category():
-#    if not g.get('admin'):
-#       return jsonify(ACCESS_DENIED), 401
-
-#    data = request.get_json()
-
-#    if not data or 'category' not in data:
-#       return jsonify("Missing category data"), 400
-
-#    category_json = data['category'].strip().lower()
-
-#    if not validate_name_50char(category_json):
-#       return jsonify("Only alphabetical and less than 50 characters names is allowed"), 500
-
-#    existing_category = db.session.query(ExpenseCategory).filter_by(name=category_json).first()
-
-#    if existing_category:
-#       return jsonify("Category already exists"), 403
-
-#    category = ExpenseCategory(name=category_json)
-
-#    try:
-#       db.session.add(category)
-#       db.session.commit()
-#       return jsonify("Category added"), 200
-#    except Exception as e:
-#       db.session.rollback()
-#       return jsonify(f"Some error occurred: {str(e)}"), 500
-
+      
 
 @app.route("/add_expense", methods=["POST", "OPTIONS"])
 @token_required
