@@ -9,16 +9,12 @@ from flask_cors import CORS
 from sqlalchemy import func
 from sqlalchemy.exc import SQLAlchemyError
 from werkzeug.security import check_password_hash, generate_password_hash
-from dotenv import load_dotenv
 from models import db, Users, Expenses
 
 from helpers import token_required, check_name_field, validate_password, validate_username, validate_name_50char
 
 # Configure application
 app = Flask(__name__)
-
-# Load environment variables from .env file
-load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
 # Retrieve and split the CORS addresses from the environment (ensuring no extra whitespace)
 CORS_ADDRESS = os.getenv("CORS_ADDRESS")
